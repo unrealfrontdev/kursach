@@ -69,6 +69,48 @@ app.post('/login', (req, res) => {
   );
 });
 
+// Эндпоинт для получения всех пользователей
+app.get('/users', (req, res) => {
+  db.all('SELECT * FROM users', [], (err, rows) => {
+    if (err) {
+      console.error('Ошибка при получении пользователей:', err);
+      return res.status(500).json({ error: 'Ошибка базы данных' });
+    }
+    res.json({ users: rows });
+  });
+});
+
+// Добавить пользователя (через админ-панель)
+app.post('/users', (req, res) => {
+  const { username, telegram } = req.body;
+  if (!username || !telegram) {
+    return res.status(400).json({ error: 'Все поля обязательны' });
+  }
+  db.run(
+    'INSERT INTO users (username, telegram) VALUES (?, ?)',
+    [username, telegram],
+    function (err) {
+      if (err) {
+        console.error('Ошибка при добавлении пользователя:', err);
+        return res.status(500).json({ error: 'Ошибка базы данных' });
+      }
+      res.json({ success: true, user: { id: this.lastID, username, telegram } });
+    }
+  );
+});
+
+// Удалить пользователя
+app.delete('/users/:id', (req, res) => {
+  const userId = req.params.id;
+  db.run('DELETE FROM users WHERE id = ?', [userId], function (err) {
+    if (err) {
+      console.error('Ошибка при удалении пользователя:', err);
+      return res.status(500).json({ error: 'Ошибка базы данных' });
+    }
+    res.json({ success: true });
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Сервер запущен на http://localhost:${PORT}`);
 });

@@ -19,10 +19,7 @@ const Autorization = ({ setIsAuthorized }) => {
       const data = await res.json();
       if (data.success) {
         setMessage('Вход выполнен успешно!');
-        if (setIsAuthorized) setIsAuthorized({
-          username,
-          telegram: telegramLink
-        }); // передаем объект пользователя
+        if (setIsAuthorized) setIsAuthorized(data.user); // <--- вот тут передаём весь объект user
       } else {
         setMessage(data.error || 'Пользователь не найден');
       }
@@ -34,35 +31,40 @@ const Autorization = ({ setIsAuthorized }) => {
   return (
     <div className="d-flex align-items-center justify-content-center" style={{ 
       backgroundColor: '#000',
-      width: '100%',
-      height: '100%'
+      width: '50vh',
+      height: '50vh',
+      paddingBottom: '0' // по умолчанию
     }}>
       <div className="card shadow-lg" style={{ 
-        width: '90%',
-        maxWidth: '600px',
+        width: '100%',
+        maxWidth: '950px',
         backgroundColor: '#000', 
-        borderTop: '3px solid #6A00A7',
-        borderBottom: '3px solid #6A00A7',
+        borderTop: '6px solid #6A00A7',
+        borderBottom: '6px solid #6A00A7',
         borderLeft: 'none',
         borderRight: 'none',
         borderRadius: '0',
-        margin: '2rem 0'
+        margin: '5rem 0',
+        boxShadow: '0 0 60px 20px #6A00A7'
       }}>
-        <div className="card-body p-4">
-          <h2 className="text-center mb-4" style={{ 
-            color: '#fff', 
-            fontSize: '2.5rem',
-            fontWeight: 'normal',
-            marginBottom: '2rem'
-          }}>
+        <div className="card-body p-5" style={{ padding: '4rem' }}>
+          <h2
+            className="text-center mb-4"
+            style={{
+              color: '#fff',
+              fontSize: '2.2rem', // уменьшено
+              fontWeight: 'normal', // убран bold
+              marginBottom: '2rem',
+              whiteSpace: 'nowrap'
+            }}
+          >
             Авторизация
           </h2>
-
           <div>
-            <div className="mb-4">
+            <div className="mb-5">
               <label htmlFor="username" className="form-label" style={{ 
                 color: '#fff',
-                fontSize: '1.1rem'
+                fontSize: '1.1rem' // уменьшено
               }}>
                 Имя пользователя
               </label>
@@ -75,21 +77,20 @@ const Autorization = ({ setIsAuthorized }) => {
                 style={{
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: '1px solid #6A00A7',
+                  borderBottom: '2px solid #6A00A7',
                   borderRadius: '0',
                   color: '#fff',
-                  fontSize: '1.2rem',
-                  padding: '15px 0',
+                  fontSize: '1.2rem', // уменьшено
+                  padding: '16px 0', // чуть меньше
                   width: '100%'
                 }}
                 onFocus={(e) => e.target.style.outline = 'none'}
               />
             </div>
-
-            <div className="mb-4">
+            <div className="mb-5">
               <label htmlFor="telegram" className="form-label" style={{ 
                 color: '#fff',
-                fontSize: '1.1rem'
+                fontSize: '1.1rem' // уменьшено
               }}>
                 Ссылка на telegram
               </label>
@@ -102,17 +103,16 @@ const Autorization = ({ setIsAuthorized }) => {
                 style={{
                   backgroundColor: 'transparent',
                   border: 'none',
-                  borderBottom: '1px solid #6A00A7',
+                  borderBottom: '2px solid #6A00A7',
                   borderRadius: '0',
                   color: '#fff',
-                  fontSize: '1.2rem',
-                  padding: '15px 0',
+                  fontSize: '1.2rem', // уменьшено
+                  padding: '16px 0', // чуть меньше
                   width: '100%'
                 }}
                 onFocus={(e) => e.target.style.outline = 'none'}
               />
             </div>
-
             <button
               type="button"
               className="btn w-100"
@@ -121,10 +121,10 @@ const Autorization = ({ setIsAuthorized }) => {
                 backgroundColor: '#6A00A7',
                 border: 'none',
                 color: '#fff',
-                fontSize: '1.2rem',
-                padding: '12px',
+                fontSize: '1.2rem', // уменьшено
+                padding: '14px',
                 borderRadius: '0',
-                fontWeight: 'normal'
+                fontWeight: 'normal' // убран bold
               }}
               onMouseOver={(e) => e.target.style.backgroundColor = '#7C3AED'}
               onMouseOut={(e) => e.target.style.backgroundColor = '#8B5CF6'}
@@ -132,7 +132,7 @@ const Autorization = ({ setIsAuthorized }) => {
               Войти
             </button>
             {message && (
-              <div style={{ color: '#fff', marginTop: 10, textAlign: 'center' }}>{message}</div>
+              <div style={{ color: '#fff', marginTop: 20, textAlign: 'center', fontSize: '1.05rem' }}>{message}</div>
             )}
           </div>
         </div>
@@ -151,6 +151,7 @@ const Autorization = ({ setIsAuthorized }) => {
         .btn:focus {
           box-shadow: none !important;
         }
+
       `}</style>
     </div>
   );
