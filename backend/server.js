@@ -23,7 +23,8 @@ db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
-    telegram TEXT NOT NULL
+    telegram TEXT NOT NULL,
+    selected_game TEXT
   )
 `);
 
@@ -109,6 +110,37 @@ app.delete('/users/:id', (req, res) => {
     }
     res.json({ success: true });
   });
+});
+
+// Установить выбранную игру
+app.post('/users/:id/select-game', (req, res) => {
+  const userId = req.params.id;
+  const { game } = req.body;
+  db.run(
+    'UPDATE users SET selected_game = ? WHERE id = ?',
+    [game, userId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: 'Ошибка базы данных' });
+      }
+      res.json({ success: true });
+    }
+  );
+});
+
+// Снять заявку
+app.post('/users/:id/unselect-game', (req, res) => {
+  const userId = req.params.id;
+  db.run(
+    'UPDATE users SET selected_game = NULL WHERE id = ?',
+    [userId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: 'Ошибка базы данных' });
+      }
+      res.json({ success: true });
+    }
+  );
 });
 
 app.listen(PORT, () => {

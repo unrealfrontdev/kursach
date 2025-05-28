@@ -1,16 +1,16 @@
 import React from 'react';
 
-const PopularGames = ({ onClose }) => {
+const PopularGames = ({ onGameSelect }) => {
   const games = [
-    { name: 'DOTA 2', icon: 'D' },
-    { name: 'Counter-Strike 2', icon: 'CS' },
-    { name: 'Apex Legends', icon: 'AL' },
-    { name: 'Valorant', icon: 'V' },
-    { name: 'League of Legends', icon: 'LL' },
-    { name: 'Fortnite', icon: 'F' },
-    { name: 'Overwatch 2', icon: 'OW' },
-    { name: 'Rocket League', icon: 'RL' },
-    { name: 'Cyberpunk 2077', icon: 'CP' }
+    { name: 'DOTA 2', icon: 'D', description: 'Dota 2 — MOBA, стратегия и RPG. Две команды по 5 игроков.' },
+    { name: 'Counter-Strike 2', icon: 'CS', description: 'CS2 — командный шутер, террористы против спецназа.' },
+    { name: 'Apex Legends', icon: 'AL', description: 'Apex — королевская битва с героями и способностями.' },
+    { name: 'Valorant', icon: 'V', description: 'Valorant — тактический шутер с уникальными агентами.' },
+    { name: 'League of Legends', icon: 'LL', description: 'LoL — MOBA, две команды по 5, уничтожь базу врага.' },
+    { name: 'Fortnite', icon: 'F', description: 'Fortnite — королевская битва с постройками.' },
+    { name: 'Overwatch 2', icon: 'OW', description: 'Overwatch — командный шутер с героями.' },
+    { name: 'Rocket League', icon: 'RL', description: 'Rocket League — футбол на машинках.' },
+    { name: 'Cyberpunk 2077', icon: 'CP', description: 'Cyberpunk — экшен-RPG в открытом мире.' }
   ];
 
   return (
@@ -83,14 +83,12 @@ const PopularGames = ({ onClose }) => {
                       marginBottom: '15px'
                     }}
                   ></div>
-                  <div 
+                  <div
                     className="d-flex align-items-center"
-                    style={{
-                      backgroundColor: '#000000',
-                      minHeight: '60px'
-                    }}
+                    style={{ backgroundColor: '#000000', minHeight: '60px', cursor: 'pointer' }}
+                    onClick={() => onGameSelect && onGameSelect(game)}
                   >
-                    <div 
+                    <div
                       className="me-3 d-flex align-items-center justify-content-center"
                       style={{
                         width: '50px',
