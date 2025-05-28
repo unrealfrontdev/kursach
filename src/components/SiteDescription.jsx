@@ -1,17 +1,35 @@
 import React from 'react';
+import PopularGames from './popular-games-grid.jsx';
 
-const SiteDescription = () => {
+const SiteDescription = ({ onOpenGames }) => {
     return (
       <>
         <style>
           {`
             .site-description {
                 color: #ffffff;
-                max-width: 600px;
+                max-width: 440px;
                 position: relative;
                 z-index: 1;
             }
-
+            @media (max-width: 600px) {
+                .site-description {
+                    max-width: 98vw;
+                    padding: 10px !important;
+                    min-height: 320px !important;
+                }
+                .description-text h2,
+                .description-text .open-games-btn {
+                    font-size: 1.5rem !important;
+                    white-space: normal !important;
+                }
+                .description-text .lead {
+                    font-size: 1rem !important;
+                }
+                .list-unstyled li {
+                    font-size: 0.95rem !important;
+                }
+            }
             .site-description::before {
                 content: '';
                 position: absolute;
@@ -24,33 +42,65 @@ const SiteDescription = () => {
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: 80%;
-                opacity: 0.4; /* Увеличил прозрачность с 0.1 до 0.2 */
+                opacity: 0.4;
                 z-index: -1;
             }
-
             .description-text {
                 text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
             }
-
-            .description-text h2 {
+            .description-text h2, .description-text .open-games-btn {
                 font-size: 2.5rem;
                 font-weight: bold;
+                background: none;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                padding: 0;
+                margin-bottom: 1rem;
+                text-align: left;
+                transition: color 0.2s;
+                background: linear-gradient(90deg, #8a2be2, #fff, #8a2be2, #fff, #8a2be2);
+                background-size: 200% auto;
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: shimmer 10s linear infinite;
+                white-space: nowrap;
             }
-
+            @keyframes shimmer {
+                0% {
+                    background-position: 200% 0;
+                }
+                100% {
+                    background-position: -200% 0;
+                }
+            }
+            .description-text .open-games-btn:hover {
+                color: #8a2be2;
+                text-decoration: underline;
+                -webkit-text-fill-color: #8a2be2;
+                background: none;
+                animation: none;
+            }
             .description-text .lead {
                 font-size: 1.2rem;
                 line-height: 1.6;
             }
-
             .list-unstyled li {
                 font-size: 1.1rem;
                 padding-left: 10px;
             }
           `}
         </style>
-        <div className="site-description p-4">
+        <div className="site-description p-4" style={{ position: 'relative', minHeight: '400px' }}>
           <div className="description-text">
-            <h2 className="mb-3">Найди своих союзников</h2>
+            <button
+              className="open-games-btn"
+              onClick={onOpenGames}
+              aria-label="Показать популярные игры"
+            >
+              Найди своих союзников
+            </button>
             <p className="lead mb-4">
               MyVibe - это платформа, где геймеры находят единомышленников 
               для совместной игры. Создавай команду, общайся и побеждай вместе!
