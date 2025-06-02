@@ -34,15 +34,30 @@ app.post('/register', (req, res) => {
   if (!username || !telegram) {
     return res.status(400).json({ error: 'Все поля обязательны' });
   }
-  db.run(
-    'INSERT INTO users (username, telegram) VALUES (?, ?)',
-    [username, telegram],
-    function (err) {
+  // Проверка на существование пользователя с таким ником
+  db.get(
+    'SELECT * FROM users WHERE username = ?',
+    [username],
+    (err, row) => {
       if (err) {
-        console.error('Ошибка при добавлении пользователя:', err);
+        console.error('Ошибка при поиске пользователя:', err);
         return res.status(500).json({ error: 'Ошибка базы данных' });
       }
-      res.json({ success: true, id: this.lastID });
+      if (row) {
+        return res.json({ success: false, error: 'пользователь с таким ником уже существует' });
+      }
+      // Если ник свободен — регистрируем
+      db.run(
+        'INSERT INTO users (username, telegram) VALUES (?, ?)',
+        [username, telegram],
+        function (err) {
+          if (err) {
+            console.error('Ошибка при добавлении пользователя:', err);
+            return res.status(500).json({ error: 'Ошибка базы данных' });
+          }
+          res.json({ success: true, id: this.lastID });
+        }
+      );
     }
   );
 });

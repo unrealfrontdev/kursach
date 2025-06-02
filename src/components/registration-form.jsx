@@ -16,6 +16,8 @@ const RegistrationForm = () => {
       setMessage('Регистрация успешна!');
       setUsername('');
       setTelegramLink('');
+    } else if (data.error === 'пользователь с таким ником уже существует') {
+      setMessage('пользователь с таким ником уже существует');
     } else {
       setMessage(data.error || 'Ошибка регистрации');
     }

@@ -20,6 +20,7 @@ function App() {
   const [showGamesGrid, setShowGamesGrid] = useState(false); // Новое состояние
   const [selectedGame, setSelectedGame] = useState(null);
   const [gameApplicants, setGameApplicants] = useState([]);
+  const [authWarning, setAuthWarning] = useState(false); // новое состояние
 
   const loginRef = useRef(null);
   const registerRef = useRef(null);
@@ -68,6 +69,7 @@ function App() {
         onLoginClick={() => {
           setShowGamesGrid(false);
           setView('login');
+          setAuthWarning(false); // сброс предупреждения
           setTimeout(() => {
             loginRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 0);
@@ -75,13 +77,15 @@ function App() {
         onRegisterClick={() => {
           setShowGamesGrid(false);
           setView('register');
+          setAuthWarning(false); // сброс предупреждения
           setTimeout(() => {
             registerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 0);
         }}
         onProfileClick={() => {
-          setShowGamesGrid(false); // Скрыть грид при переходе в профиль
+          setShowGamesGrid(false);
           setView('profile');
+          setAuthWarning(false); // сброс предупреждения
         }}
         isAuthorized={isAuthorized}
       />
@@ -93,7 +97,7 @@ function App() {
           }}
           className="d-flex flex-column flex-md-row justify-content-between align-items-center w-100"
         >
-          {showGamesGrid ? (
+          {showGamesGrid && isAuthorized ? (
             selectedGame ? (
               // Карточка игры слева, справа — заявки
               <div className="d-flex w-100" style={{ minHeight: '70vh' }}>
@@ -127,21 +131,47 @@ function App() {
             )
           ) : (
             <>
-              <div className="w-100 w-md-50 d-flex justify-content-center align-items-center order-2 order-md-1">
+              <div className="w-100 w-md-50 d-flex flex-column justify-content-center align-items-center order-2 order-md-1">
                 {(view === 'main' || view === 'login') && (
-                  <div ref={loginRef}>
-                    <Autotization setIsAuthorized={handleAuthorized} />
-                  </div>
+                  <>
+                    <div ref={loginRef}>
+                      <Autotization setIsAuthorized={handleAuthorized} />
+                    </div>
+                    {authWarning && (
+                      <div style={{ color: '#ff4d4f', marginTop: 16, fontSize: '1.1rem', textAlign: 'center' }}>
+                        сначала нужно авторизоватся
+                      </div>
+                    )}
+                  </>
                 )}
                 {view === 'register' && (
-                  <div ref={registerRef}>
-                    <RegistrationForm />
-                  </div>
+                  <>
+                    <div ref={registerRef}>
+                      <RegistrationForm />
+                    </div>
+                    {authWarning && (
+                      <div style={{ color: '#ff4d4f', marginTop: 16, fontSize: '1.1rem', textAlign: 'center' }}>
+                        сначала нужно авторизоватся
+                      </div>
+                    )}
+                  </>
                 )}
                 {view === 'profile' && <ProfileCard user={user} />}
               </div>
               <div className="w-100 w-md-50 d-flex justify-content-center align-items-center order-1 order-md-2 mb-4 mb-md-0">
-                <SiteDescription onOpenGames={() => { setShowGamesGrid(true); setSelectedGame(null); }} />
+                <SiteDescription onOpenGames={() => { 
+                  if (isAuthorized) {
+                    setShowGamesGrid(true); 
+                    setSelectedGame(null); 
+                    setAuthWarning(false);
+                  } else {
+                    setView('login');
+                    setAuthWarning(true); // показать предупреждение
+                    setTimeout(() => {
+                      loginRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 0);
+                  }
+                }} />
               </div>
             </>
           )}
