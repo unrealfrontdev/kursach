@@ -2,15 +2,60 @@ import React from 'react';
 
 const PopularGames = ({ onGameSelect }) => {
   const games = [
-    { name: 'DOTA 2', icon: 'D', description: 'Dota 2 — многопользовательская онлайн-битва на арене (MOBA). Две команды по 5 игроков сражаются за уничтожение вражеской крепости, развивая героев и применяя тактику.' },
-    { name: 'Counter-Strike 2', icon: 'CS', description: 'CS2 — культовый командный шутер, где террористы и спецназ сражаются в раундах. Требует точности, командной работы и знания карт. Включает режимы соревновательной игры.' },
-    { name: 'Apex Legends', icon: 'AL', description: 'Apex Legends — динамичная королевская битва в научно-фантастическом мире. Уникальные герои со способностями, продвинутая система движения и командное взаимодействие.' },
-    { name: 'Valorant', icon: 'V', description: 'Valorant — тактический шутер с уникальными агентами, обладающими особыми способностями. Сочетает точную стрельбу в стиле CS с элементами героев-способностей.' },
-    { name: 'League of Legends', icon: 'LL', description: 'League of Legends — популярнейшая MOBA игра. Команды из 5 чемпионов сражаются за уничтожение вражеской базы, прокачивая персонажей и координируя действия.' },
-    { name: 'Fortnite', icon: 'F', description: 'Fortnite — яркая королевская битва с уникальной механикой строительства. Игроки сражаются, строят укрепления и используют разнообразное оружие для победы.' },
-    { name: 'Overwatch 2', icon: 'OW', description: 'Overwatch 2 — командный героический шутер с яркими персонажами. Каждый герой обладает уникальными способностями и ролью. Включает PvP и PvE режимы.' },
-    { name: 'Rocket League', icon: 'RL', description: 'Rocket League — динамичный футбол на ракетных машинах. Игроки выполняют невероятные трюки, забивают эффектные голы и участвуют в захватывающих матчах.' },
-    { name: 'Cyberpunk 2077', icon: 'CP', description: 'Cyberpunk 2077 — масштабная ролевая игра в открытом мире будущего. Погрузитесь в Найт-Сити, выполняйте задания, прокачивайте киберимпланты и влияйте на сюжет.' }
+    { 
+      name: 'DOTA 2', 
+      icon: 'D', 
+      logo: '/dota2_logo.png',
+      description: 'Dota 2 — многопользовательская онлайн-битва на арене (MOBA). Две команды по 5 игроков сражаются за уничтожение вражеской крепости, развивая героев и применяя тактику.' 
+    },
+    { 
+      name: 'Counter-Strike 2', 
+      icon: 'CS', 
+      logo: '/counterstrike2_logo.png',
+      description: 'CS2 — культовый командный шутер, где террористы и спецназ сражаются в раундах. Требует точности, командной работы и знания карт. Включает режимы соревновательной игры.' 
+    },
+    { 
+      name: 'Apex Legends', 
+      icon: 'AL', 
+      logo: '/Apex_logo.svg',
+      description: 'Apex Legends — динамичная королевская битва в научно-фантастическом мире. Уникальные герои со способностями, продвинутая система движения и командное взаимодействие.' 
+    },
+    { 
+      name: 'Valorant', 
+      icon: 'V', 
+      logo: '/Valorant_logo.svg.png',
+      description: 'Valorant — тактический шутер с уникальными агентами, обладающими особыми способностями. Сочетает точную стрельбу в стиле CS с элементами героев-способностей.' 
+    },
+    { 
+      name: 'League of Legends', 
+      icon: 'LL', 
+      logo: '/League_of_Legends_logo.svg',
+      description: 'League of Legends — популярнейшая MOBA игра. Команды из 5 чемпионов сражаются за уничтожение вражеской базы, прокачивая персонажей и координируя действия.' 
+    },
+    { 
+      name: 'Fortnite', 
+      icon: 'F', 
+      logo: '/fortnite_logo.svg',
+      description: 'Fortnite — яркая королевская битва с уникальной механикой строительства. Игроки сражаются, строят укрепления и используют разнообразное оружие для победы.' 
+    },
+    { 
+      name: 'Overwatch 2', 
+      icon: 'OW', 
+      logo: '/Overwatch_logo.png',
+      description: 'Overwatch 2 — командный героический шутер с яркими персонажами. Каждый герой обладает уникальными способностями и ролью. Включает PvP и PvE режимы.' 
+    },
+    { 
+      name: 'Rocket League', 
+      icon: 'RL', 
+      logo: '/Rocket_League_logo.svg',
+      description: 'Rocket League — динамичный футбол на ракетных машинах. Игроки выполняют невероятные трюки, забивают эффектные голы и участвуют в захватывающих матчах.' 
+    },
+    { 
+      name: 'Cyberpunk 2077', 
+      icon: 'CP', 
+      logo: '/Cyberpunk_2077_logo.svg',
+      description: 'Cyberpunk 2077 — масштабная ролевая игра в открытом мире будущего. Погрузитесь в Найт-Сити, выполняйте задания, прокачивайте киберимпланты и влияйте на сюжет.' 
+    }
   ];
 
   return (
@@ -23,6 +68,11 @@ const PopularGames = ({ onGameSelect }) => {
             flex-direction: column;
             justify-content: center;
             padding-bottom: 32px;
+          }
+          .game-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
           }
           @media (max-width: 600px) {
             .popular-games-grid {
@@ -45,10 +95,9 @@ const PopularGames = ({ onGameSelect }) => {
             .popular-games-grid .d-flex {
               min-height: 48px !important;
             }
-            .popular-games-grid .me-3 {
+            .game-logo {
               width: 38px !important;
               height: 38px !important;
-              font-size: 10px !important;
             }
             .popular-games-grid .px-2 {
               padding-left: 0.5rem !important;
@@ -85,20 +134,12 @@ const PopularGames = ({ onGameSelect }) => {
                     style={{ backgroundColor: '#000000', minHeight: '60px', cursor: 'pointer' }}
                     onClick={() => onGameSelect && onGameSelect(game)}
                   >
-                    <div
-                      className="me-3 d-flex align-items-center justify-content-center"
-                      style={{
-                        width: '50px',
-                        height: '50px',
-                        backgroundColor: '#cc3333',
-                        border: '2px solid #ffffff',
-                        fontSize: '12px',
-                        fontWeight: 'bold',
-                        color: 'white',
-                        flexShrink: 0
-                      }}
-                    >
-                      {game.icon}
+                    <div className="me-3">
+                      <img 
+                        src={game.logo} 
+                        alt={game.name}
+                        className="game-logo"
+                      />
                     </div>
                     <div className="flex-grow-1">
                       <span className="text-white" style={{fontSize: '1rem', fontWeight: 'normal'}}>
