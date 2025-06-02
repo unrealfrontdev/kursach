@@ -20,20 +20,47 @@ const GameBanner = ({ user }) => {
     <>
       <style>
         {`
-          @media (max-width: 600px) {
-            .game-banner-mobile {
-              flex-direction: column !important;
-              align-items: flex-start !important;
-              padding: 14px 10px !important;
-              gap: 8px !important;
+          .game-banner {
+            background: #111;
+            color: #fff;
+            border: 2px solid #8a2be2;
+            border-radius: 10px;
+            padding: 18px 24px;
+            margin-bottom: 10px;
+            width: 100%;
+          }
+
+          @media (max-width: 768px) {
+            .game-banner {
+              padding: 14px 16px;
             }
-            .game-banner-mobile .in-game-label {
-              margin-top: 6px !important;
+            .banner-username {
               font-size: 1rem !important;
             }
-            .game-banner-mobile .tg-link-row {
-              flex-wrap: wrap !important;
-              font-size: 0.95rem !important;
+            .banner-telegram {
+              font-size: 0.9rem !important;
+            }
+            .banner-status {
+              font-size: 0.9rem !important;
+            }
+          }
+
+          @media (max-width: 480px) {
+            .game-banner {
+              padding: 12px;
+            }
+            .banner-username {
+              font-size: 0.9rem !important;
+            }
+            .banner-telegram {
+              font-size: 0.8rem !important;
+            }
+            .banner-content {
+              flex-direction: column !important;
+              gap: 8px !important;
+            }
+            .banner-status {
+              align-self: flex-start !important;
             }
           }
         `}
@@ -41,12 +68,6 @@ const GameBanner = ({ user }) => {
       <div
         className="w-100 game-banner-mobile"
         style={{
-          background: '#111',
-          color: '#fff',
-          border: '2px solid #8a2be2',
-          borderRadius: '10px',
-          padding: '18px 24px',
-          marginBottom: '10px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between'

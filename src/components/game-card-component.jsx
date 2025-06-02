@@ -35,39 +35,70 @@ const GameCard = ({
     <>
       <style>
         {`
-          @media (max-width: 600px) {
-            .game-card-mobile {
-              max-width: 98vw !important;
-              min-height: 50vh !important;
+          .game-card {
+            background-color: #000000;
+            color: #ffffff;
+            width: 100%;
+            max-width: 38rem;
+            min-height: 70vh;
+            border-top: 4px solid #6A00A7;
+            border-bottom: 4px solid #6A00A7;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 2rem;
+          }
+          
+          @media (max-width: 768px) {
+            .game-card {
+              min-height: auto;
+              padding: 1.5rem;
+            }
+            .game-title {
+              font-size: 1.5rem !important;
+            }
+            .game-icon {
+              width: 45px !important;
+              height: 45px !important;
+              font-size: 16px !important;
+            }
+            .game-description {
+              font-size: 0.9rem !important;
+              margin-bottom: 1.5rem !important;
+            }
+            .game-button {
+              width: 100% !important;
+              font-size: 1rem !important;
               padding: 12px !important;
             }
-            .game-card-mobile h2 {
-              font-size: 1.3rem !important;
+          }
+
+          @media (max-width: 480px) {
+            .game-card {
+              padding: 1rem;
             }
-            .game-card-mobile p {
-              font-size: 0.98rem !important;
+            .game-title {
+              font-size: 1.25rem !important;
             }
-            .game-card-mobile button {
-              font-size: 1rem !important;
-              padding: 10px 0 !important;
+            .game-icon {
+              width: 35px !important;
+              height: 35px !important;
+              font-size: 14px !important;
+            }
+            .game-description {
+              font-size: 0.85rem !important;
+              margin-bottom: 1rem !important;
+            }
+            .game-button {
+              padding: 10px !important;
             }
           }
         `}
       </style>
       <div
-        className="p-4 game-card-mobile"
+        className="p-4 game-card"
         style={{
-          backgroundColor: '#000000',
-          color: '#ffffff',
-          maxWidth: '38rem',
-          minHeight: '70vh',
-          width: '100%',
-          borderTop: '4px solid #6A00A7',
-          borderBottom: '4px solid #6A00A7',
-          borderLeft: 'none',
-          borderRight: 'none',
-          borderRadius: '0',
-          boxShadow: '0 10px 25px rgba(0, 0, 0, 0.5)',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',

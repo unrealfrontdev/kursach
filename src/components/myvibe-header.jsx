@@ -57,6 +57,33 @@ const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized })
               margin-top: 1rem;
             }
           }
+          @media (max-width: 768px) {
+            .header-container {
+              padding: 10px !important;
+            }
+            .brand-text {
+              font-size: 1.25rem !important;
+            }
+            .nav-links {
+              gap: 15px !important;
+            }
+            .nav-link {
+              font-size: 1rem !important;
+            }
+          }
+          @media (max-width: 480px) {
+            .header-flex {
+              flex-direction: column !important;
+              align-items: center !important;
+            }
+            .nav-links {
+              margin-top: 10px !important;
+            }
+            .logo-icon {
+              width: 35px !important;
+              height: 35px !important;
+            }
+          }
         `}
       </style>
       <header className="header-bg">

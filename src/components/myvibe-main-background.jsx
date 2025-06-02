@@ -25,7 +25,7 @@ const MainContainer = ({ children }) => {
           }
           .main-content {
             flex: 1 1 auto;
-            padding: 40px 0;
+            padding: 20px 0;
             height: 100%;
             position: relative;
             z-index: 1;
@@ -39,29 +39,29 @@ const MainContainer = ({ children }) => {
             display: flex;
             flex-direction: column;
           }
-          .main-background h1,
-          .main-background h2,
-          .main-background h3,
-          .main-background h4,
-          .main-background h5,
-          .main-background h6 {
-            color: #ffffff;
+          @media (max-width: 768px) {
+            .main-background {
+              min-height: 100vh;
+              height: auto;
+            }
+            .main-content {
+              padding: 10px;
+            }
+            .content-wrapper {
+              padding: 0 15px;
+            }
           }
-          .main-background p {
-            color: #e5e7eb;
+          @media (max-width: 480px) {
+            .main-content {
+              padding: 5px;
+            }
           }
         `}
       </style>
       <main className="main-background">
         <div className="main-content">
           <div className="container-fluid content-wrapper">
-            {children || (
-              <div className="row">
-                <div className="col-12">
-                  {/* Контент будет добавлен здесь */}
-                </div>
-              </div>
-            )}
+            {children}
           </div>
         </div>
       </main>

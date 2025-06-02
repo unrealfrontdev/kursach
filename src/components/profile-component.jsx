@@ -41,11 +41,11 @@ const ProfileCard = ({ user }) => {
 
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
-      <div style={profileCardStyle}>
+      <div style={profileCardStyle} className="profile-card">
         <div style={{ backgroundColor: 'transparent', border: 'none', textAlign: 'center', paddingTop: '2.5rem', paddingBottom: '2.5rem' }}>
-          <h1 style={profileTitleStyle} className="mb-0">Профиль</h1>
+          <h1 style={profileTitleStyle} className="mb-0 profile-title">Профиль</h1>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingBottom: '3rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingBottom: '3rem' }} className="profile-info">
           <div style={{ marginBottom: '2.5rem', textAlign: 'center', width: '100%' }}>
             <div style={usernameStyle} className="mb-2">{user?.username || ''}</div>
             <div style={gradientLineStyle} className="mb-2"></div>
@@ -58,6 +58,38 @@ const ProfileCard = ({ user }) => {
           </div>
         </div>
       </div>
+      <style>
+        {`
+          @media (max-width: 768px) {
+            .profile-card {
+              width: 95% !important;
+              min-height: 60vh !important;
+              margin: 10px auto !important;
+            }
+            .profile-title {
+              font-size: 1.75rem !important;
+            }
+            .profile-info {
+              padding: 1.5rem !important;
+            }
+          }
+          @media (max-width: 480px) {
+            .profile-card {
+              width: 100% !important;
+              min-height: 50vh !important;
+            }
+            .profile-title {
+              font-size: 1.5rem !important;
+            }
+            .profile-info {
+              padding: 1rem !important;
+            }
+            .user-info {
+              font-size: 1rem !important;
+            }
+          }
+        `}
+      </style>
     </div>
   );
 };

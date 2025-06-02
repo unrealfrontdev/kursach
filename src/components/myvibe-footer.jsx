@@ -39,6 +39,27 @@ const Footer = () => {
             opacity: 0.8;
             text-decoration: none;
           }
+            @media (max-width: 768px) {
+            .footer-content {
+              padding: 8px 0 !important;
+            }
+            .footer-text, .phone-link {
+              font-size: 1rem !important;
+            }
+          }
+          @media (max-width: 480px) {
+            .footer-content {
+              padding: 5px 0 !important;
+            }
+            .footer-text, .phone-link {
+              font-size: 0.9rem !important;
+            }
+            .footer-row {
+              flex-direction: column !important;
+              align-items: center !important;
+              text-align: center !important;
+            }
+          }
         `}
       </style>
       <footer className="footer-bg">

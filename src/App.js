@@ -99,33 +99,83 @@ function App() {
         >
           {showGamesGrid && isAuthorized ? (
             selectedGame ? (
-              // Карточка игры слева, справа — заявки
-              <div className="d-flex w-100" style={{ minHeight: '70vh' }}>
-                <div className="w-100 w-md-50 d-flex justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
-                  <GameCard
-                    gameName={selectedGame.name}
-                    gameIcon={selectedGame.icon}
-                    description={selectedGame.description}
-                    user={user}
-                    onUserUpdate={setUser}
-                  />
-                </div>
-                <div className="w-100 w-md-50 d-flex flex-column align-items-center" style={{ minHeight: '70vh', overflowY: 'auto' }}>
-                  <h3 className="text-white mb-3" style={{ fontWeight: 'normal', fontSize: '1.5rem' }}>Заявки на игру</h3>
-                  {gameApplicants.length === 0 ? (
-                    <div className="text-white-50">Нет заявок</div>
-                  ) : (
-                    gameApplicants.map(applicant => (
-                      <div key={applicant.id} className="mb-3 w-100" style={{ maxWidth: 600 }}>
-                        <GameBanner user={applicant} />
-                      </div>
-                    ))
-                  )}
+              // Изменяем структуру для адаптивности
+              <div className="d-flex flex-column w-100">
+                <style>
+                {`
+                  @media (max-width: 768px) {
+                    .game-container {
+                      flex-direction: column !important;
+                      padding: 10px !important;
+                    }
+                    .game-card-container {
+                      width: 100% !important;
+                      margin-bottom: 20px !important;
+                    }
+                    .applicants-container {
+                      width: 100% !important;
+                      padding: 0 10px !important;
+                    }
+                    .applicants-title {
+                      font-size: 1.25rem !important;
+                      margin: 15px 0 !important;
+                    }
+                  }
+                  .game-container {
+                    width: 100%;
+                    display: flex;
+                    gap: 20px;
+                    padding: 20px;
+                  }
+                  .game-card-container {
+                    width: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: flex-start;
+                  }
+                  .applicants-container {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    max-height: 70vh;
+                    overflow-y: auto;
+                  }
+                  .applicants-title {
+                    color: white;
+                    font-weight: normal;
+                    font-size: 1.5rem;
+                    margin-bottom: 20px;
+                  }
+                `}
+                </style>
+                <div className="game-container">
+                  <div className="game-card-container">
+                    <GameCard
+                      gameName={selectedGame.name}
+                      gameIcon={selectedGame.icon}
+                      description={selectedGame.description}
+                      user={user}
+                      onUserUpdate={setUser}
+                    />
+                  </div>
+                  <div className="applicants-container">
+                    <h3 className="applicants-title">Заявки на игру</h3>
+                    {gameApplicants.length === 0 ? (
+                      <div className="text-white-50">Нет заявок</div>
+                    ) : (
+                      gameApplicants.map(applicant => (
+                        <div key={applicant.id} className="mb-3 w-100" style={{ maxWidth: 600 }}>
+                          <GameBanner user={applicant} />
+                        </div>
+                      ))
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (
-              // Если игра не выбрана — грид на всю ширину
-              <div className="w-100 d-flex justify-content-center align-items-center" style={{ minHeight: '70vh' }}>
+              // Убираем минимальную высоту и отступ сверху
+              <div className="w-100 d-flex justify-content-center align-items-start">
                 <PopularGames onGameSelect={setSelectedGame} />
               </div>
             )

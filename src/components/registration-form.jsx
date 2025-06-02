@@ -29,7 +29,7 @@ const RegistrationForm = () => {
       width: '50vh',
       height: '50vh'
     }}>
-      <div className="card shadow-lg" style={{ 
+      <div className="card shadow-lg auth-card" style={{ 
         width: '100%',
         maxWidth: '950px',
         backgroundColor: '#000', 
@@ -43,7 +43,7 @@ const RegistrationForm = () => {
         
       }}>
         <div className="card-body p-5" style={{ padding: '4rem' }}>
-          <h2 className="text-center mb-4" style={{ 
+          <h2 className="text-center mb-4 auth-title" style={{ 
             color: '#fff', 
             fontSize: '2.2rem', // уменьшено
             fontWeight: 'normal', // убран bold
@@ -61,7 +61,7 @@ const RegistrationForm = () => {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control form-input"
                 id="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
@@ -87,7 +87,7 @@ const RegistrationForm = () => {
               </label>
               <input
                 type="text"
-                className="form-control"
+                className="form-control form-input"
                 id="telegram"
                 value={telegramLink}
                 onChange={(e) => setTelegramLink(e.target.value)}
@@ -106,7 +106,7 @@ const RegistrationForm = () => {
             </div>
             <button
               type="button"
-              className="btn w-100"
+              className="btn w-100 submit-button"
               onClick={handleSubmit}
               style={{
                 backgroundColor: '#6A00A7',
@@ -143,6 +143,39 @@ const RegistrationForm = () => {
           box-shadow: none !important;
         }
       `}</style>
+      <style>
+{`
+  @media (max-width: 768px) {
+    .auth-card {
+      width: 90% !important;
+      margin: 1rem auto !important;
+      padding: 1.5rem !important;
+    }
+    .auth-title {
+      font-size: 1.75rem !important;
+    }
+    .form-input {
+      font-size: 1rem !important;
+    }
+  }
+  @media (max-width: 480px) {
+    .auth-card {
+      width: 95% !important;
+      padding: 1rem !important;
+    }
+    .auth-title {
+      font-size: 1.5rem !important;
+    }
+    .form-input {
+      font-size: 0.9rem !important;
+    }
+    .submit-button {
+      font-size: 1rem !important;
+      padding: 10px !important;
+    }
+  }
+`}
+</style>
     </div>
   );
 };

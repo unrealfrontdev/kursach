@@ -22,15 +22,12 @@ const PopularGames = ({ onGameSelect }) => {
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding-top: 32px;
             padding-bottom: 32px;
           }
           @media (max-width: 600px) {
             .popular-games-grid {
               min-height: calc(100vh - 120px);
-              padding-top: 70px; /* высота header */
-              padding-bottom: 60px; /* высота footer */
-              margin-top: 200px; /* добавлено! */
+              padding-bottom: 60px;
               box-sizing: border-box;
               justify-content: flex-start;
             }
