@@ -5,7 +5,6 @@ const GameBanner = ({ user }) => {
 
   if (!user) return null;
 
-  // Формируем ссылку на Telegram
   const tgLink = user.telegram.startsWith('@')
     ? `https://t.me/${user.telegram.slice(1)}`
     : user.telegram;
@@ -14,6 +13,17 @@ const GameBanner = ({ user }) => {
     await navigator.clipboard.writeText(tgLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
+  };
+
+  const getStatusStyle = (status) => {
+    const styles = {
+      'VIP': { color: '#FFD700' },
+      'Alfa': { color: '#FF4500' },
+      'MVP': { color: '#9400D3' },
+      'MEGA': { color: '#00FF00' },
+      'Z': { color: '#FF0000' }
+    };
+    return styles[status] || {};
   };
 
   return (
@@ -28,6 +38,17 @@ const GameBanner = ({ user }) => {
             padding: 18px 24px;
             margin-bottom: 10px;
             width: 100%;
+          }
+
+          .username-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+          }
+
+          .status-badge {
+            font-size: 0.9em;
+            font-weight: bold;
           }
 
           @media (max-width: 768px) {
@@ -59,32 +80,35 @@ const GameBanner = ({ user }) => {
               flex-direction: column !important;
               gap: 8px !important;
             }
-            .banner-status {
-              align-self: flex-start !important;
-            }
           }
         `}
       </style>
-      <div
-        className="w-100 game-banner-mobile"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between'
-        }}
-      >
+      <div className="w-100 game-banner-mobile" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+      }}>
         <div>
-          <div style={{ fontWeight: 600, fontSize: '1.1rem' }}>{user.username}</div>
-          <div
-            className="tg-link-row"
-            style={{
-              fontSize: '0.95rem',
-              color: '#aaa',
-              display: 'flex',
-              alignItems: 'center',
-              gap: 8
-            }}
-          >
+          <div className="username-container">
+            <span style={{ fontWeight: 600, fontSize: '1.1rem' }}>
+              {user.username}
+            </span>
+            {user?.status && (
+              <span 
+                className="status-badge"
+                style={getStatusStyle(user.status)}
+              >
+                ({user.status})
+              </span>
+            )}
+          </div>
+          <div className="tg-link-row" style={{
+            fontSize: '0.95rem',
+            color: '#aaa',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8
+          }}>
             <a
               href={tgLink}
               target="_blank"

@@ -24,7 +24,8 @@ db.run(`
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
     telegram TEXT NOT NULL,
-    selected_game TEXT
+    selected_game TEXT,
+    status TEXT
   )
 `);
 
@@ -149,6 +150,23 @@ app.post('/users/:id/unselect-game', (req, res) => {
   db.run(
     'UPDATE users SET selected_game = NULL WHERE id = ?',
     [userId],
+    function (err) {
+      if (err) {
+        return res.status(500).json({ error: 'Ошибка базы данных' });
+      }
+      res.json({ success: true });
+    }
+  );
+});
+
+// Обновить статус пользователя
+app.post('/users/:id/status', (req, res) => {
+  const userId = req.params.id;
+  const { status } = req.body;
+  
+  db.run(
+    'UPDATE users SET status = ? WHERE id = ?',
+    [status, userId],
     function (err) {
       if (err) {
         return res.status(500).json({ error: 'Ошибка базы данных' });

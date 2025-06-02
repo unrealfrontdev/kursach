@@ -9,6 +9,8 @@ const AdminUsersPanel = () => {
     telegram: ''
   });
 
+  const statuses = ["VIP", "Alfa", "MVP", "MEGA", "Z"];
+
   // Загрузка пользователей из базы при монтировании
   const fetchUsers = () => {
     fetch('http://localhost:3001/users')
@@ -77,6 +79,24 @@ const AdminUsersPanel = () => {
     setEditingUser(null);
   };
 
+  const handleStatusChange = async (userId, status) => {
+    try {
+      const res = await fetch(`http://localhost:3001/users/${userId}/status`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status })
+      });
+      
+      if (res.ok) {
+        setUsers(users.map(user => 
+          user.id === userId ? { ...user, status } : user
+        ));
+      }
+    } catch (err) {
+      console.error('Ошибка при обновлении статуса:', err);
+    }
+  };
+
   return (
     <>
       <link 
@@ -115,6 +135,7 @@ const AdminUsersPanel = () => {
                         <th>ID</th>
                         <th>Имя</th>
                         <th>Telegram</th>
+                        <th>Статус</th>
                         <th>Действия</th>
                       </tr>
                     </thead>
@@ -124,6 +145,24 @@ const AdminUsersPanel = () => {
                           <td>{user.id}</td>
                           <td>{user.username}</td>
                           <td>{user.telegram}</td>
+                          <td>
+                            <select 
+                              className="form-select"
+                              value={user.status || ''}
+                              onChange={(e) => handleStatusChange(user.id, e.target.value)}
+                              style={{
+                                backgroundColor: '#f8f9fa',
+                                border: '1px solid #ced4da',
+                                borderRadius: '4px',
+                                padding: '4px 8px'
+                              }}
+                            >
+                              <option value="">Без статуса</option>
+                              {statuses.map(status => (
+                                <option key={status} value={status}>{status}</option>
+                              ))}
+                            </select>
+                          </td>
                           <td>
                             <div className="btn-group" role="group">
                               {/* Редактирование можно реализовать аналогично */}

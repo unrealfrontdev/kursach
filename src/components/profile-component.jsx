@@ -39,6 +39,17 @@ const ProfileCard = ({ user }) => {
     fontWeight: 'bold'
   };
 
+  const getStatusStyle = (status) => {
+    const styles = {
+      'VIP': { color: '#FFD700' },
+      'Alfa': { color: '#FF4500' },
+      'MVP': { color: '#9400D3' },
+      'MEGA': { color: '#00FF00' },
+      'Z': { color: '#FF0000' }
+    };
+    return styles[status] || {};
+  };
+
   return (
     <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
       <div style={profileCardStyle} className="profile-card">
@@ -47,7 +58,14 @@ const ProfileCard = ({ user }) => {
         </div>
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flex: 1, paddingLeft: '2.5rem', paddingRight: '2.5rem', paddingBottom: '3rem' }} className="profile-info">
           <div style={{ marginBottom: '2.5rem', textAlign: 'center', width: '100%' }}>
-            <div style={usernameStyle} className="mb-2">{user?.username || ''}</div>
+            <div style={usernameStyle} className="mb-2">
+              {user?.username || ''}
+              {user?.status && (
+                <span style={{marginLeft: '8px', ...getStatusStyle(user.status)}}>
+                  ({user.status})
+                </span>
+              )}
+            </div>
             <div style={gradientLineStyle} className="mb-2"></div>
             <div style={labelTextStyle}>имя пользователя</div>
           </div>
