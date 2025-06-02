@@ -85,10 +85,14 @@ const GameBanner = ({ user }) => {
       </style>
       <div className="w-100 game-banner-mobile" style={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
+        flexDirection: 'column',
+        gap: '10px'
       }}>
-        <div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
           <div className="username-container">
             <span style={{ fontWeight: 600, fontSize: '1.1rem' }}>
               {user.username}
@@ -102,43 +106,54 @@ const GameBanner = ({ user }) => {
               </span>
             )}
           </div>
-          <div className="tg-link-row" style={{
-            fontSize: '0.95rem',
-            color: '#aaa',
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8
-          }}>
-            <a
-              href={tgLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#aaa', textDecoration: 'underline' }}
-            >
-              {user.telegram}
-            </a>
-            <button
-              onClick={handleCopy}
-              style={{
-                background: 'none',
-                border: 'none',
-                color: '#8a2be2',
-                cursor: 'pointer',
-                fontSize: '1.1rem',
-                padding: 0
-              }}
-              title="Скопировать ссылку на Telegram"
-            >
-              📋
-            </button>
-            {copied && (
-              <span style={{ color: '#4caf50', fontSize: '0.95rem' }}>Скопировано!</span>
-            )}
-          </div>
         </div>
-        <span className="in-game-label" style={{ color: '#8a2be2', fontWeight: 700 }}>
-          В игре
-        </span>
+        
+        {user.team_description && (
+          <div style={{
+            fontSize: '0.9rem',
+            color: '#fff',
+            backgroundColor: 'rgba(138, 43, 226, 0.1)',
+            padding: '10px',
+            borderRadius: '4px',
+            borderLeft: '3px solid #8a2be2'
+          }}>
+            {user.team_description}
+          </div>
+        )}
+        
+        <div className="tg-link-row" style={{
+          fontSize: '0.95rem',
+          color: '#aaa',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 8
+        }}>
+          <a
+            href={tgLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: '#aaa', textDecoration: 'underline' }}
+          >
+            {user.telegram}
+          </a>
+          <button
+            onClick={handleCopy}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#8a2be2',
+              cursor: 'pointer',
+              fontSize: '1.1rem',
+              padding: 0
+            }}
+            title="Скопировать ссылку на Telegram"
+          >
+            📋
+          </button>
+          {copied && (
+            <span style={{ color: '#4caf50', fontSize: '0.95rem' }}>Скопировано!</span>
+          )}
+        </div>
       </div>
     </>
   );

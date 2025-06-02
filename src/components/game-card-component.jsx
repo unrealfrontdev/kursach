@@ -8,6 +8,7 @@ const GameCard = ({
   onUserUpdate
 }) => {
   const [loading, setLoading] = useState(false);
+  const [teamDescription, setTeamDescription] = useState('');
 
   const hasRequest = user?.selected_game === gameName;
 
@@ -16,9 +17,16 @@ const GameCard = ({
     await fetch(`http://localhost:3001/users/${user.id}/select-game`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ game: gameName })
+      body: JSON.stringify({ 
+        game: gameName,
+        teamDescription: teamDescription 
+      })
     });
-    onUserUpdate && onUserUpdate({ ...user, selected_game: gameName });
+    onUserUpdate && onUserUpdate({ 
+      ...user, 
+      selected_game: gameName,
+      team_description: teamDescription 
+    });
     setLoading(false);
   };
 
@@ -149,8 +157,27 @@ const GameCard = ({
           {description}
         </p>
 
-        {/* Кнопка по центру 80% ширины */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {/* Текстовое поле для описания команды */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <textarea
+            placeholder="Опишите, каких союзников вы ищете..."
+            value={teamDescription}
+            onChange={(e) => setTeamDescription(e.target.value)}
+            style={{
+              width: '80%',
+              minHeight: '100px',
+              backgroundColor: 'transparent',
+              border: '2px solid #8a2be2',
+              borderRadius: '4px',
+              color: '#ffffff',
+              padding: '10px',
+              marginBottom: '20px',
+              resize: 'vertical',
+              fontSize: '1rem'
+            }}
+            onFocus={(e) => e.target.style.borderColor = '#9932cc'}
+            onBlur={(e) => e.target.style.borderColor = '#8a2be2'}
+          />
           {hasRequest ? (
             <button
               style={{

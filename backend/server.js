@@ -25,7 +25,8 @@ db.run(`
     username TEXT NOT NULL,
     telegram TEXT NOT NULL,
     selected_game TEXT,
-    status TEXT
+    status TEXT,
+    team_description TEXT
   )
 `);
 
@@ -131,10 +132,10 @@ app.delete('/users/:id', (req, res) => {
 // Установить выбранную игру
 app.post('/users/:id/select-game', (req, res) => {
   const userId = req.params.id;
-  const { game } = req.body;
+  const { game, teamDescription } = req.body;
   db.run(
-    'UPDATE users SET selected_game = ? WHERE id = ?',
-    [game, userId],
+    'UPDATE users SET selected_game = ?, team_description = ? WHERE id = ?',
+    [game, teamDescription, userId],
     function (err) {
       if (err) {
         return res.status(500).json({ error: 'Ошибка базы данных' });
