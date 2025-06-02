@@ -6,6 +6,17 @@ const RegistrationForm = () => {
   const [message, setMessage] = useState('');
 
   const handleSubmit = async () => {
+    if (!username || !telegramLink) {
+      setMessage('Заполните все поля');
+      return;
+    }
+
+    // Проверка формата ссылки на телеграм
+    if (!telegramLink.startsWith('@')) {
+      setMessage('Ссылка на telegram должна начинаться с @');
+      return;
+    }
+
     const res = await fetch('http://localhost:3001/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

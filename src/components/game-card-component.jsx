@@ -12,6 +12,22 @@ const GameCard = ({
 
   const hasRequest = user?.selected_game === gameName;
 
+  // Функция для получения пути к логотипу игры
+  const getGameLogo = (gameName) => {
+    const logos = {
+      'DOTA 2': '/dota2_logo.png',
+      'Counter-Strike 2': '/counterstrike2_logo.png',
+      'Apex Legends': '/Apex_logo.svg',
+      'Valorant': '/Valorant_logo.svg.png',
+      'League of Legends': '/League_of_Legends_logo.svg',
+      'Fortnite': '/fortnite_logo.svg',
+      'Overwatch 2': '/Overwatch_logo.png',
+      'Rocket League': '/Rocket_League_logo.svg',
+      'Cyberpunk 2077': '/Cyberpunk_2077_logo.svg'
+    };
+    return logos[gameName];
+  };
+
   const handleApply = async () => {
     setLoading(true);
     await fetch(`http://localhost:3001/users/${user.id}/select-game`, {
@@ -58,6 +74,14 @@ const GameCard = ({
             padding: 2rem;
           }
           
+          .game-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            background-color: transparent;
+            border: none;
+          }
+          
           @media (max-width: 768px) {
             .game-card {
               min-height: auto;
@@ -80,6 +104,10 @@ const GameCard = ({
               font-size: 1rem !important;
               padding: 12px !important;
             }
+            .game-logo {
+              width: 40px;
+              height: 40px;
+            }
           }
 
           @media (max-width: 480px) {
@@ -100,6 +128,10 @@ const GameCard = ({
             }
             .game-button {
               padding: 10px !important;
+            }
+            .game-logo {
+              width: 35px;
+              height: 35px;
             }
           }
         `}
@@ -122,23 +154,22 @@ const GameCard = ({
           }}
         ></div>
 
-        {/* Заголовок с иконкой - НАЗВАНИЕ СЛЕВА ОТ ЛОГОТИПА */}
+        {/* Заголовок с логотипом */}
         <div className="d-flex align-items-center mb-4">
           <div
             className="d-flex align-items-center justify-content-center"
             style={{
               width: '60px',
               height: '60px',
-              backgroundColor: '#cc3333',
-              border: '3px solid #ffffff',
-              fontSize: '20px',
-              fontWeight: 'bold',
-              color: 'white',
-              flexShrink: 0,
+              backgroundColor: 'transparent',
               marginRight: '20px'
             }}
           >
-            {gameIcon}
+            <img 
+              src={getGameLogo(gameName)}
+              alt={gameName}
+              className="game-logo"
+            />
           </div>
           <h2 className="text-white mb-0" style={{ fontSize: '2rem', fontWeight: 'bold' }}>
             {gameName}
