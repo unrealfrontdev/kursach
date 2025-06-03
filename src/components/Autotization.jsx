@@ -138,7 +138,7 @@ const Autorization = ({ setIsAuthorized }) => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>{`
         .form-control:focus {
           box-shadow: none !important;
           border-top-color: #A855F7 !important;
@@ -151,7 +151,6 @@ const Autorization = ({ setIsAuthorized }) => {
         .btn:focus {
           box-shadow: none !important;
         }
-
       `}</style>
     </div>
   );

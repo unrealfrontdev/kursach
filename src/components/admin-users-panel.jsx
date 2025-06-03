@@ -260,7 +260,7 @@ const AdminUsersPanel = () => {
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .avatar-circle {
           font-weight: 600;
         }
