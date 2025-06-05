@@ -10,6 +10,7 @@ import AdminUsersPanel from './components/admin-users-panel.jsx';
 import PopularGames from './components/popular-games-grid.jsx'; // Импортируйте грид
 import GameCard from './components/game-card-component.jsx';
 import GameBanner from './components/game-banner.jsx';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './App.css';
 
