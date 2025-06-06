@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const AdminUsersPanel = () => {
+const AdminUsersPanel = ({ onLogout }) => {
   const [users, setUsers] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editingUser, setEditingUser] = useState(null);
@@ -111,13 +111,22 @@ const AdminUsersPanel = () => {
                     <i className="fas fa-users me-2"></i>
                     Управление пользователями
                   </h4>
-                  <button 
-                    className="btn btn-light btn-sm"
-                    onClick={handleAddUser}
-                  >
-                    <i className="fas fa-plus me-1"></i>
-                    Добавить пользователя
-                  </button>
+                  <div>
+                    <button 
+                      className="btn btn-light btn-sm me-2"
+                      onClick={onLogout}
+                    >
+                      <i className="fas fa-sign-out-alt me-1"></i>
+                      Выйти
+                    </button>
+                    <button 
+                      className="btn btn-light btn-sm"
+                      onClick={handleAddUser}
+                    >
+                      <i className="fas fa-plus me-1"></i>
+                      Добавить пользователя
+                    </button>
+                  </div>
                 </div>
               </div>
               

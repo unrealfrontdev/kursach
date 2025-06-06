@@ -140,7 +140,8 @@ const RegistrationForm = () => {
         </div>
       </div>
 
-      <style jsx>{`
+      <style>
+      {`
         .form-control:focus {
           box-shadow: none !important;
           border-top-color: #A855F7 !important;
@@ -153,40 +154,41 @@ const RegistrationForm = () => {
         .btn:focus {
           box-shadow: none !important;
         }
-      `}</style>
+      `}
+      </style>
       <style>
-{`
-  @media (max-width: 768px) {
-    .auth-card {
-      width: 90% !important;
-      margin: 1rem auto !important;
-      padding: 1.5rem !important;
-    }
-    .auth-title {
-      font-size: 1.75rem !important;
-    }
-    .form-input {
-      font-size: 1rem !important;
-    }
-  }
-  @media (max-width: 480px) {
-    .auth-card {
-      width: 95% !important;
-      padding: 1rem !important;
-    }
-    .auth-title {
-      font-size: 1.5rem !important;
-    }
-    .form-input {
-      font-size: 0.9rem !important;
-    }
-    .submit-button {
-      font-size: 1rem !important;
-      padding: 10px !important;
-    }
-  }
-`}
-</style>
+      {`
+        @media (max-width: 768px) {
+          .auth-card {
+            width: 90% !important;
+            margin: 1rem auto !important;
+            padding: 1.5rem !important;
+          }
+          .auth-title {
+            font-size: 1.75rem !important;
+          }
+          .form-input {
+            font-size: 1rem !important;
+          }
+        }
+        @media (max-width: 480px) {
+          .auth-card {
+            width: 95% !important;
+            padding: 1rem !important;
+          }
+          .auth-title {
+            font-size: 1.5rem !important;
+          }
+          .form-input {
+            font-size: 0.9rem !important;
+          }
+          .submit-button {
+            font-size: 1rem !important;
+            padding: 10px !important;
+          }
+        }
+      `}
+      </style>
     </div>
   );
 };
