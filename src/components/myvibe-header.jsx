@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized, onLogout }) => {
+const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized, onLogout, onPopularGamesClick }) => {
   return (
     <>
       <style>
@@ -119,6 +119,13 @@ const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized, o
                         onClick={onProfileClick}
                       >
                         Профиль
+                      </button>
+                      <button
+                        className="nav-link-custom btn btn-link p-0"
+                        style={{ background: 'none', border: 'none' }}
+                        onClick={onPopularGamesClick}
+                      >
+                        Популярные игры
                       </button>
                       <button
                         className="nav-link-custom btn btn-link p-0"

@@ -93,7 +93,7 @@ function App() {
         onLoginClick={() => {
           setShowGamesGrid(false);
           setView('login');
-          setAuthWarning(false); // сброс предупреждения
+          setAuthWarning(false);
           setTimeout(() => {
             loginRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 0);
@@ -101,7 +101,7 @@ function App() {
         onRegisterClick={() => {
           setShowGamesGrid(false);
           setView('register');
-          setAuthWarning(false); // сброс предупреждения
+          setAuthWarning(false);
           setTimeout(() => {
             registerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
           }, 0);
@@ -109,10 +109,16 @@ function App() {
         onProfileClick={() => {
           setShowGamesGrid(false);
           setView('profile');
-          setAuthWarning(false); // сброс предупреждения
+          setAuthWarning(false);
         }}
         isAuthorized={isAuthorized}
-        onLogout={handleLogout} // <-- добавлено
+        onLogout={handleLogout}
+        onPopularGamesClick={() => {
+          setShowGamesGrid(true);
+          setSelectedGame(null);
+          setView('main');
+          setAuthWarning(false);
+        }}
       />
       <MainContainer style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
         <div
