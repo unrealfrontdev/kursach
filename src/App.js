@@ -37,6 +37,14 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    setIsAuthorized(false);
+    setUser(null);
+    setView('main');
+    setShowGamesGrid(false);
+    setSelectedGame(null);
+  };
+
   // Загружать пользователей, оставивших заявку на выбранную игру
   useEffect(() => {
     if (showGamesGrid && selectedGame) {
@@ -89,6 +97,7 @@ function App() {
           setAuthWarning(false); // сброс предупреждения
         }}
         isAuthorized={isAuthorized}
+        onLogout={handleLogout} // <-- добавлено
       />
       <MainContainer style={{ flex: 1, display: 'flex', alignItems: 'center' }}>
         <div
@@ -170,7 +179,8 @@ function App() {
                           <GameBanner user={applicant} />
                         </div>
                       ))
-                    )}
+                    )
+                    }
                   </div>
                 </div>
               </div>

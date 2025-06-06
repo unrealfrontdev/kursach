@@ -1,9 +1,8 @@
 import React from 'react';
 
-const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized }) => {
+const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized, onLogout }) => {
   return (
     <>
-
       <style>
         {`
           .logo-icon {
@@ -113,13 +112,22 @@ const Header = ({ onLoginClick, onRegisterClick, onProfileClick, isAuthorized })
                       </button>
                     </>
                   ) : (
-                    <button
-                      className="nav-link-custom btn btn-link p-0"
-                      style={{ background: 'none', border: 'none' }}
-                      onClick={onProfileClick}
-                    >
-                      Профиль
-                    </button>
+                    <>
+                      <button
+                        className="nav-link-custom btn btn-link p-0"
+                        style={{ background: 'none', border: 'none' }}
+                        onClick={onProfileClick}
+                      >
+                        Профиль
+                      </button>
+                      <button
+                        className="nav-link-custom btn btn-link p-0"
+                        style={{ background: 'none', border: 'none' }}
+                        onClick={onLogout}
+                      >
+                        Выйти
+                      </button>
+                    </>
                   )}
                 </nav>
               </div>
