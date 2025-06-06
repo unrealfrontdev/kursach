@@ -26,10 +26,23 @@ function App() {
   const loginRef = useRef(null);
   const registerRef = useRef(null);
 
+  // При инициализации читаем localStorage
+  useEffect(() => {
+    const savedUser = localStorage.getItem('user');
+    const savedAuth = localStorage.getItem('isAuthorized');
+    if (savedUser && savedAuth === 'true') {
+      setUser(JSON.parse(savedUser));
+      setIsAuthorized(true);
+      setView(JSON.parse(savedUser).id === 9 ? 'admin' : 'profile');
+    }
+  }, []);
+
   const handleAuthorized = (userData) => {
     setIsAuthorized(true);
     setUser(userData);
-    setShowGamesGrid(false); // Скрыть грид при входе
+    setShowGamesGrid(false);
+    localStorage.setItem('user', JSON.stringify(userData));
+    localStorage.setItem('isAuthorized', 'true');
     if (userData.id === 9) {
       setView('admin');
     } else {
@@ -43,6 +56,8 @@ function App() {
     setView('main');
     setShowGamesGrid(false);
     setSelectedGame(null);
+    localStorage.removeItem('user');
+    localStorage.removeItem('isAuthorized');
   };
 
   // Загружать пользователей, оставивших заявку на выбранную игру
